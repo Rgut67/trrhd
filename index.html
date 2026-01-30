@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<title>Hewo ^^</title>
+<link rel="Day_cat :3" href="Fursona.gif" type="image/gif">
+
+<style>
+audio {
+    display: none; 
+}
+
+/* --- Tło pulpitu XP --- */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Tahoma, Verdana, Arial;
+  background: url("https://media1.tenor.com/m/8X6lieAy46cAAAAd/microhard-bliss-grass.gif") center center fixed;
+  background-size: cover;
+  overflow: hidden;
+  cursor: default;
+}
+
+/* --- Pasek zadań --- */
+#taskbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 40px;
+  background: linear-gradient(#3a6ea5, #1d3b63);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 5px;
+  box-shadow: 0 -2px 5px #0008;
+  z-index: 1000;
+}
+
+#taskbar-left {
+  display: flex;
+  align-items: center;
+}
+
+/* --- Przycisk Start XP --- */
+#startBtn {
+  background: linear-gradient(#0a8000, #00b200);
+  border: 2px solid #004d00;
+  border-radius: 4px;
+  color: white;
+  font-weight: bold;
+  padding: 5px 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  box-shadow: 1px 1px 2px #0004;
+}
+
+#startBtn:hover {
+  background: linear-gradient(#00b200, #0a8000);
+}
+
+/* --- Godzina --- */
+#clock {
+  color: white;
+  font-weight: bold;
+  margin-right: 10px;
+  text-shadow: 1px 1px 2px #0008;
+}
+
+/* --- Start Menu XP --- */
+#startMenu {
+  display: none;
+  position: fixed;
+  bottom: 40px;
+  left: 0;
+  width: 220px;
+  background: #cce0ff;
+  border: 2px solid #2e5ca7;
+  box-shadow: 3px 3px 8px #0008;
+  z-index: 2000;
+  border-radius: 4px;
+}
+
+#startMenu ul {
+  list-style: none;
+  padding: 5px 0;
+  margin: 0;
+}
+
+#startMenu li {
+  padding: 5px 10px;
+  cursor: pointer;
+  font-weight: bold;
+  color: #003a80;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #a0c0ff;
+}
+
+#startMenu li:last-child {
+  border-bottom: none;
+}
+
+#startMenu li img {
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+}
+
+/* Zaznaczenie XP */
+#startMenu li:hover {
+  background: linear-gradient(to right, #0a64d0, #60a0ff);
+  color: white;
+  text-shadow: 1px 1px 2px #0004;
+  border-radius: 2px;
+}
+
+/* --- Okna aplikacji --- */
+.window {
+  position: absolute;
+  width: 500px;
+  min-width: 300px;
+  height: 300px;
+  min-height: 200px;
+  background: #c0d0ff;
+  border: 2px solid #3a6ea5;
+  border-radius: 6px;
+  box-shadow: 0 0 25px #002f80;
+  display: none;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* --- Titlebar XP --- */
+.titlebar {
+  height: 32px;
+  background: linear-gradient(#4f81d9, #2f5fa5);
+  border-bottom: 2px solid #14407a;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 5px;
+  cursor: move;
+  color: white;
+  font-weight: bold;
+}
+
+.titlebar .controls button {
+  background: linear-gradient(#f1f6ff, #9ac8ff);
+  border: 2px solid #2e5ca7;
+  border-radius: 4px;
+  margin-left: 2px;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  padding: 0;
+  font-weight: bold;
+  color: #003a80;
+}
+
+.titlebar .controls button:hover {
+  background: linear-gradient(#cbe2ff, #ffffff);
+}
+
+/* --- Content --- */
+.content {
+  flex: 1;
+  padding: 10px;
+  overflow: auto;
+  color: black;
+}
+
+/* --- Przyciski XP --- */
+.btn-xp {
+  background: linear-gradient(#f1f6ff, #9ac8ff);
+  border: 2px solid #2e5ca7;
+  border-radius: 6px;
+  color: #003a80;
+  font-weight: bold;
+  padding: 5px 15px;
+  cursor: pointer;
+  margin: 5px 0;
+  box-shadow: 1px 1px 2px #0008;
+}
+
+.btn-xp:hover {
+  background: linear-gradient(#cbe2ff, #ffffff);
+}
+
+/* --- Scrollbar XP --- */
+.content::-webkit-scrollbar {
+  width: 16px;
+}
+
+.content::-webkit-scrollbar-track {
+  background: #d0e0ff;
+}
+
+.content::-webkit-scrollbar-thumb {
+  background: #3a6ea5;
+  border-radius: 8px;
+  border: 3px solid #d0e0ff;
+}
+</style>
+</head>
+
+<body>
+
+<button onclick="audio.play()">Odtwórz dźwięk</button>
+
+<!-- Pasek zadań -->
+<div id="taskbar">
+  <div id="taskbar-left">
+    <button id="startBtn">Start</button>
+  </div>
+  <div id="clock">12:00 01/01/2009</div>
+</div>
+
+<!-- --- Start Menu --- -->
+<div id="startMenu">
+  <ul>
+    <li onclick="openWindow('home'); toggleStartMenu()">
+      <img src="https://media.tenor.com/Yq2v9u5KGE4AAAAi/open-file-folder-objects.gif">
+      Strona główna
+    </li>
+    <li onclick="openWindow('about'); toggleStartMenu()">
+      <img src="https://media.tenor.com/3tFgUtHfhBwAAAAi/omori-oyasumi.gif">
+      O mnie
+    </li>
+    <li onclick="openWindow('games'); toggleStartMenu()">
+      <img src="https://media.tenor.com/IaiW8j0wVyIAAAAi/puro-gotta-sweep.gif">
+      Gry
+    </li>
+  </ul>
+</div>
+
+<!-- --- Okno home --- -->
+<div id="home" class="window">
+  <div class="titlebar">
+    <span>Początek</span>
+    <div class="controls">
+      <button onclick="minimizeWindow('home')">_</button>
+      <button onclick="maximizeWindow('home')">□</button>
+      <button onclick="closeWindow('home')">X</button>
+    </div>
+  </div>
+  <div class="content">
+    <h2>Hejo w moim "windowsie" :3c</h2>
+    <h3>możesz tą i inne aplikację schować przesunąć i powiękrzyć na cały ekran :3</h3>
+    <p>kliknij w poniższe aby otwożyć kolejne aplikacje które mówiom o mnie ^^</p>
+    <p>© Radosław G</p>
+
+    <button class="btn-xp" onclick="openWindow('about')">O mnie</button>
+    <button class="btn-xp" onclick="openWindow('games')">Gry</button>
+  </div>
+</div>
+
+<!-- --- Okno o mnie --- -->
+<div id="about" class="window">
+  <div class="titlebar">
+    <span>O mnie</span>
+    <div class="controls">
+      <button onclick="minimizeWindow('about')">_</button>
+      <button onclick="maximizeWindow('about')">□</button>
+      <button onclick="closeWindow('about')">X</button>
+    </div>
+  </div>
+  <div class="content">
+    <h2>Hejo!</h2>
+    <p>Mam na imie Radek interesuje się informatyką i budowaniem komuterów i ich naprawianiem.</p>
+    <p>często naprawiam komputery i nie tylko, lubie pomagać innym ludziom w jaki kolwiek możliwy sposób jaki mogę ale jestem overthinkerem i czasami mogę się zapytać za dużo i spowodować że druga osoba może się poczuć nie swojo 3:</p>
+    <p>jestem introwertykiem, nie lubię gdy jest zbyt głośno lub zbyt tłocznie, nie wiem czemu ale zawsze się marwie o swoich znajomych. Lubię styl frutiger aero i takie retro strony z lat 2000 bardzo lubię też i muzykę elektroniczną, rock i metal w sumie to lubie prawie wszystkie gatunki muzyczne oprócz rapu mam złe wspomnienia z rapem.</p>
+    <p>lubię kodować i oglądać różne filmy i seriale tylko muszę je oglądać z kimś bo za bardzo samemu nie lubię oglądać czuje się w tedy samotnie i pusto gdy to oglądam</p>
+    <p>moim ulubionym filmem jest "Harry Poter i kamień fizoloficzny" i moim ulubionym serialem jest rick i morty tak samo jak wyspa totalnej poraszki. Bardzo fajnie się mi je oglądało kiedyś ale teraz są słabo dostępne 3:</p>
+    <p>Bardzo dziękuje za przeczytanie życzę tobie miłego dnia :3</p>
+    <p>© Radosław G</p>
+  </div>
+</div>
+
+<!-- --- Okno gier --- -->
+<div id="games" class="window">
+  <div class="titlebar">
+    <span>Gry które lubię ;3 :</span>
+    <div class="controls">
+      <button onclick="minimizeWindow('games')">_</button>
+      <button onclick="maximizeWindow('games')">□</button>
+      <button onclick="closeWindow('games')">X</button>
+    </div>
+  </div>
+  <div class="content">
+    <ul>
+      <li>1. Changed – jedna z gier które bardzo lubię grać</li>
+      <li>2. Undertale – gra która ma fajny lore ale ma słaby fandom</li>
+      <li>3. VRChat – poznałem tu dużo ludzi, ale ostatnio nie gram</li>
+      <li>4. Roblox – dużo dobrych gier, ale masa nudnych kopii</li>
+      <li>5. Minecraft – z modami jest super do gry ze znajomymi</li>
+      <li>6. Terraria – fajna gra, ale wolę grać z kimś</li>
+    </ul>
+  </div>
+</div>
+
+<script>
+// --- Start Menu ---
+const startBtn = document.getElementById('startBtn');
+const startMenu = document.getElementById('startMenu');
+
+startBtn.addEventListener('click', toggleStartMenu);
+
+function toggleStartMenu() {
+  startMenu.style.display = (startMenu.style.display === 'block') ? 'none' : 'block';
+}
+
+// --- Obsługa okien ---
+let zIndexCounter = 1;
+
+function openWindow(id) {
+  const win = document.getElementById(id);
+  win.style.display = 'flex';
+  win.style.zIndex = zIndexCounter++;
+}
+
+function closeWindow(id) { document.getElementById(id).style.display = 'none'; }
+function minimizeWindow(id) { document.getElementById(id).style.display = 'none'; }
+
+function maximizeWindow(id) {
+  const win = document.getElementById(id);
+  if (win.dataset.maximized !== 'true') {
+    win.dataset.prevWidth = win.style.width;
+    win.dataset.prevHeight = win.style.height;
+    win.dataset.prevTop = win.style.top;
+    win.dataset.prevLeft = win.style.left;
+
+    win.style.top = '0';
+    win.style.left = '0';
+    win.style.width = '100%';
+    win.style.height = 'calc(100% - 40px)';
+    win.dataset.maximized = 'true';
+  } else {
+    win.style.width = win.dataset.prevWidth;
+    win.style.height = win.dataset.prevHeight;
+    win.style.top = win.dataset.prevTop;
+    win.style.left = win.dataset.prevLeft;
+    win.dataset.maximized = 'false';
+  }
+}
+
+// --- Drag & Drop okien ---
+const windows = document.querySelectorAll('.window');
+windows.forEach(win => {
+  const title = win.querySelector('.titlebar');
+  title.addEventListener('mousedown', function(e) {
+    win.style.zIndex = zIndexCounter++;
+    let offsetX = e.clientX - win.offsetLeft;
+    let offsetY = e.clientY - win.offsetTop;
+
+    function mouseMoveHandler(e) {
+      win.style.top = (e.clientY - offsetY) + 'px';
+      win.style.left = (e.clientX - offsetX) + 'px';
+    }
+
+    function mouseUpHandler() {
+      document.removeEventListener('mousemove', mouseMoveHandler);
+      document.removeEventListener('mouseup', mouseUpHandler);
+    }
+
+    document.addEventListener('mousemove', mouseMoveHandler);
+    document.addEventListener('mouseup', mouseUpHandler);
+  });
+});
+
+// --- Zegar ---
+function updateClock() {
+  const now = new Date();
+  const hours = String(now.getHours()).padStart(2, '0');
+  const minutes = String(now.getMinutes()).padStart(2, '0');
+  const day = String(now.getDate()).padStart(2, '0');
+  const month = String(now.getMonth() + 1).padStart(2, '0');
+  const year = "2009";
+
+  document.getElementById('clock').textContent = `${hours}:${minutes} ${day}/${month}/${year}`;
+}
+
+setInterval(updateClock, 1000);
+updateClock();
+
+// --- Audio ---
+var audio = new Audio('melodia.mp3');
+audio.loop = true;
+
+audio.play().catch(err => {
+  console.warn("Autoplay zablokowany:", err);
+});
+
+// --- Pokazanie strony głównej przy starcie ---
+openWindow('home');
+</script>
+
+</body>
+</html>
+
